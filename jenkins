@@ -1,0 +1,67 @@
+import java.text.SimpleDateFormat
+import java.time.LocalDate;
+pipeline
+{
+    agent any
+    stages
+    {
+        stage("Extraer día de la semana")
+        {
+            steps
+            {
+                script
+                {
+                    def dia = new Date().getDay()
+                    switch(dia) {
+                        case 1: 
+                            def hoy = new Date()
+                            def formato = new SimpleDateFormat ("dd/MM/yyyy")
+                            def fechaFormateada = formato.format(hoy)
+                            println "El dia de hoy es: " + fechaFormateada
+
+                        break
+                        case 2: 
+                            git url 'https://github.com/Ripper2021/JavaIndra.git'
+                        break
+                        case 3: 
+                        matematicas(2,1)
+                        break
+                        case 4: 
+                            bat "ipconfig /flushdns"
+                        break
+                        case 5: 
+                            LocalDate lunes = LocalDate.now().minusDays(4);
+                            Date lunesInDateFormat = Date.from(lunes.atZone(ZoneId.systemDefault()).toInstant());
+                            def formato = new SimpleDateFormat ("dd/MM/yyyy")
+                            def fechaFormateada = formato.format(lunesInDateFormat)
+                            info="La fecha del lunes era: "+ fechaFormateada
+                            writeFile(file: "viernes.txt", text:info)
+                        break
+                        default:
+                        break
+
+                    }
+                }
+                    
+            }
+        }
+        
+    }
+}
+
+
+def matematicas(a,b){
+    suma = a+b
+    resta = a-b
+    mult = a*b
+    println "Suma: " + suma
+    println "Resta: " + resta
+    println "Multipl: " + mult
+    if(b !=0){
+        div = a/b 
+        println "Div: " + div
+    }else{
+        println "No se puede dividir por 0"
+    }
+    
+}
